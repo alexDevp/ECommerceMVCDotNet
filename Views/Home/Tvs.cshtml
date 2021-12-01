@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DAW_MP2.Models.Product>
+@{
+    ViewData["Title"] = "TVs";
+}
+<div class="page">
+    <div class="flex-container">
+
+        @foreach (var item in Model)
+        {
+            @if (item.FlagActive == true)
+            {
+                <a type="button" class="item w-100 p-3 h-100 d-inline-block" href="/Home/Product/@Html.DisplayFor(modelItem => item.Id)">
+                    <img class="card-img-top img-responsive img-center no-space" src="@Html.DisplayFor(modelItem => item.Image)" />
+                    <div class="card-body flex-d no-space">
+                        <p class="card-title no-space"> @Html.DisplayFor(modelItem => item.ProductName)</p>
+                        <p class="card-price-fe no-space"> @Html.DisplayFor(modelItem => item.Price)€</p>
+                        @if (item.Stock > 0)
+                        {
+                            <p class="available-y no-space">✅ Produto em Stock</p>
+                        }
+                        else
+                        {
+                            <p class="available-n no-space">❌ Fora de Stock</p>
+                        }
+                        <p class="card-text no-space">@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+                </a>
+            }
+
+        }
+
+    </div>
+</div>

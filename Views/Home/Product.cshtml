@@ -1,0 +1,52 @@
+﻿@model DAW_MP2.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="page justify-content-center align-items-center flex-row">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="row">
+                
+               
+                    <div class="col-md-8">
+                        <img class="single-product-img img-responsive img-center" src="@Html.DisplayFor(model => model.Image)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="product-title"> @Html.DisplayFor(modelItem => Model.ProductName)</p>
+                        <p class="product-price"> @Html.DisplayFor(modelItem => Model.Price)€</p>
+                        @if (Model.Stock > 0)
+                        {
+                            <p class="available-y">✅ Produto em Stock</p>
+                        }
+                        else
+                        {
+                            <p class="available-n">❌ Fora de Stock</p>
+                        }
+
+                        @Html.ActionLink("🛒 Comprar", "AddToCart", "Cart", new { id = Model.Id }, new { @class = "btn btn-success btn-lg" })
+
+                    </div>
+            
+                
+
+                <div class="row box">              
+                    <nav>
+                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-desc-tab" data-bs-toggle="tab" data-bs-target="#nav-desc" type="button" role="tab" aria-controls="nav-home" aria-selected="true">@Html.DisplayNameFor(model => model.Description)</button>
+                            <button class="nav-link" id="nav-esp-tab" data-bs-toggle="tab" data-bs-target="#nav-esp" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">@Html.DisplayNameFor(model => model.Specifications)</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-desc" role="tabpanel" aria-labelledby="nav-desc-tab">@Html.DisplayFor(model => model.Description)</div>
+                        <div class="tab-pane fade" id="nav-esp" role="tabpanel" aria-labelledby="nav-esp-tab">@Html.DisplayFor(model => model.Specifications)</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+         
+        
+    </div>
+</div>

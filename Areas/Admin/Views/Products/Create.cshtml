@@ -1,0 +1,100 @@
+﻿@model DAW_MP2.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page justify-content-center align-items-center flex-row">
+    
+    <div>
+        <h1>Criar Novo Produto</h1>
+        <hr />
+    </div>
+
+    <form asp-action="Create" enctype = "multipart/form-data" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group mb-3">
+            <label hidden asp-for="Id" class="control-label"></label>
+            <input hidden asp-for="Id" class="form-control" />
+            <span hidden asp-validation-for="Id" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="ProductName" class="control-label"></label>
+            <input asp-for="ProductName" class="form-control" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group mb-3">
+                    <label asp-for="Stock" class="control-label"></label>
+                    <input asp-for="Stock" class="form-control" />
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group mb-3">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group mb-3">
+                    <label asp-for="Category" class="control-label"></label>
+                    <select asp-for="Category" class="form-control">
+                        <option value="" disabled selected>Escolher uma categoria</option>
+                        <option value="SmartPhones">SmartPhones</option>
+                        <option value="TVS">TVS</option>
+                        <option value="Computers">Computers</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="FlagActive" /> @Html.DisplayNameFor(model => model.FlagActive)
+            </label>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-3">
+                    <label asp-for="Image" class="control-label"></label>
+                    <input asp-for="ImageFile" id="ImageFile" name="ImageFile" type="file" class="form-control" />
+                </div>
+            </div>
+            <div class="col-6">
+                <img class="pic img-responsive img-center" id="img" src="\images\produto-sem-imagem.png" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea rows=30 asp-for="Description" class="form-control text-area"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="Specifications" class="control-label"></label>
+                    <textarea rows=30 asp-for="Specifications" class="form-control text-area"></textarea>
+                    <span asp-validation-for="Specifications" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <a class="btn btn-dark" asp-action="Index">Voltar</a>
+            <input type="submit" value="Criar" class="btn btn-success" />
+        </div>
+    </form>
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,38 @@
+﻿@model DAW_MP2.Models.Cart
+
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page">
+    <h1>Finalizar a Compra</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Payment">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" hidden />
+                <div class="form-group">
+                    <label class="control-label">Método de Pagamento:</label>
+                    <select asp-for="IdPaymentMethod" class="form-control">
+                        <option value="" disabled selected>Escolher um tipo de pagamento</option>
+                        <option value="ed68181f-a6e7-4260-aa27-843c7dfbb33c">MBWAY</option>
+                        <option value="ed68181f-a6e7-4260-aa27-843c7dfbb33d">Multibanco</option>
+                        <option value="ed68181f-a6e7-4260-aa27-843c7dfbb33e">Cartão de Crédito</option>
+                        <option value="c6cadf0d-8ff6-4fe1-a6b0-a7a6ff72a7b6">PAYPAL</option>
+                    </select>
+                </div>                     
+                <div class="form-group">
+                    <label class="control-label">Morada:</label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Concluir" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

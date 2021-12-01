@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DAW_MP2.Models.Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="page">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="/Home/Smartphones"><img class="d-block w-100" src="~/images/banner3.png" alt="Telemóveis"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="/Home/Computers"><img class="d-block w-100" src="~/images/banner2.png" alt="Computadores"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="/Home/Tvs"><img class="d-block w-100" src="~/images/banner1.png" alt="TVs"></a>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <hr />
+    <div class="flex-container">
+
+        @foreach (var item in Model)
+        {
+            @if (item.FlagActive == true)
+            {
+                <a type="button" class="item w-100 p-3 h-100 flex-d" href="/Home/Product/@Html.DisplayFor(modelItem => item.Id)">
+                    <img class="card-img-top img-responsive img-center no-space" src="@Html.DisplayFor(modelItem => item.Image)" />
+                    <div class="card-body flex-d no-space">
+                        <p class="card-title no-space"> @Html.DisplayFor(modelItem => item.ProductName)</p>
+                        <p class="card-price-fe no-space"> @Html.DisplayFor(modelItem => item.Price)€</p>
+                        @if (item.Stock > 0)
+                        {
+                            <p class="available-y no-space">✅ Produto em Stock</p>
+                        }
+                        else
+                        {
+                            <p class="available-n no-space">❌ Fora de Stock</p>
+                        }
+                        <p class="card-text no-space">@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+                </a>
+            }
+
+        }
+
+    </div>
+</div>

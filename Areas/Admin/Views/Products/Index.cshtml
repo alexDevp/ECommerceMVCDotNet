@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DAW_MP2.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+<div class="page">
+    <h1>Produtos</h1>
+    <hr />
+    <p>
+        <a asp-action="Create" class="btn btn-success">Criar Novo Produto</a>
+    </p>
+    <hr />
+
+    <div class="flex-container">
+
+        @foreach (var item in Model)
+        {
+            <div class="item card w-100 p-3 h-100 d-inline-block">
+                <img class="card-img-top img-responsive img-center" src="@Html.DisplayFor(modelItem => item.Image)" />
+                <div class="card-body">
+                    <p class="card-title"> @Html.DisplayFor(modelItem => item.ProductName)</p>
+                    <p class="card-id"> @Html.DisplayFor(modelItem => item.Id)</p>
+                    <p class="card-price-be"> @Html.DisplayFor(modelItem => item.Price)€</p>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    @Html.ActionLink("Detalhes", "Details", "Products", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Editar", "Edit", "Products", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Apagar", "Delete", "Products", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

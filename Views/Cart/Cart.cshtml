@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DAW_MP2.Models.CartRow>
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = 0;
+
+}
+<div class="page">
+    <h1>O meu Carrinho:</h1>
+    <hr />
+    <div class="row">
+        <div class="col-8">
+            <div class="container">
+                @foreach (var item in Model)
+                {                  
+                    <div class="row">
+                        <div class="col-9">
+                            <a type="button" class=" w-100 p-3 h-100 flex-d row cart-row" href="/Home/Product/@Html.DisplayFor(modelItem => item.Id)">
+                                <div class="col-4">
+                                    <img class="card-img-top no-space " src="@Html.DisplayFor(modelItem => item.Image)" />
+                                </div>
+                                <div class="col-8 no-space">
+                                    <p class="card-title no-space"> @Html.DisplayFor(modelItem => item.ProductName)</p>
+                                    <p class="card-price-fe no-space"> @Html.DisplayFor(modelItem => item.Price)€</p>
+                                    <p class="card-text no-space">@Html.DisplayFor(modelItem => item.Description)</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-2 flex-column container-fluid row-buttons">
+                            <a class="btn btn-danger"href="/Cart/Remove/@Html.DisplayFor(modelItem => item.Id)">-</a>
+                            <a class="box btn">@Html.DisplayFor(modelItem => item.Amount)</a>
+                            <a class="btn btn-success" href="/Cart/Add/@Html.DisplayFor(modelItem => item.Id)">+</a>
+                        </div>
+                        <div class="col-1 flex-column container-fluid row-buttons">
+                            <a class="btn btn-danger" href="/Cart/Delete/@Html.DisplayFor(modelItem => item.Id)">X</a>
+                        </div>
+
+                    </div>
+                    <span hidden>@(total = total + (item.Amount * item.Price))</span> 
+                }
+
+            </div>
+        </div>
+        
+        <div class="col-4">
+            <h1>Total</h1>
+            <hr />
+            <div class="card-price-fe">@total €</div>
+            <a class="btn btn-success" href="/Cart/Payment/">Finalizar Compra</a>
+        </div>
+    </div>
+    
+</div>
